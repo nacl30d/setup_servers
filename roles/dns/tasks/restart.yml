@@ -1,0 +1,6 @@
+---
+
+- name: Be sure dns service is restarted
+  ansible.builtin.service:
+    name: dnsmasq
+    state: restarted
