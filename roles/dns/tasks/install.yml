@@ -5,9 +5,11 @@
     name:
       - dnsmasq
     state: present
+  become: yes
 
 - name: Be sure dns service is enabled
   ansible.builtin.service:
     name: dnsmasq
     state: started
     enabled: yes
+  become: yes

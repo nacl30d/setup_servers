@@ -22,6 +22,7 @@
       backup: yes
       backrefs: yes
       validate: "{{ dnsmasq.testing_command }}"
+    become: yes
     with_items:
       - "{{ dns_configures.boolean.enabled }}"
 
@@ -34,6 +35,7 @@
       backup: yes
       backrefs: yes
       validate: "{{ dnsmasq.testing_command }}"
+    become: yes
     with_items:
       - "{{ dns_configures.boolean.disabled }}"
 
@@ -46,6 +48,7 @@
       backup: yes
       backrefs: yes
       validate: "{{ dnsmasq.testing_command }}"
+    become: yes
     with_items:
       - "{{ dns_configures.strings }}"
 
@@ -58,3 +61,4 @@
     remote_src: no
     backup: yes
     validate: "{{ dnsmasq.testing_command }}"
+  become: yes
