@@ -38,7 +38,7 @@
   - name: Be sure string configs are set
     ansible.builtin.lineinfile:
       path: "{{ dnsmasq.config_file_path }}"
-      regexp: "^#?{{ item.key }}="
+      regexp: "^#?{{ item.key }}={{ item.value }}"
       line: "{{ item.key }}={{ item.value }}"
       state: present
       backup: yes
