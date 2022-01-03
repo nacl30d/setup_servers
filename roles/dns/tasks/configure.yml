@@ -21,7 +21,19 @@
       backrefs: yes
       validate: "{{ dnsmasq.testing_command }}"
     with_items:
-      - "{{ dns_configures.boolean }}"
+      - "{{ dns_configures.boolean.enabled }}"
+
+  - name: Be sure boolean configs are disabled
+    ansible.builtin.lineinfile:
+      path: "{{ dnsmasq.config_file_path }}"
+      regexp: "^{{ item.key }}"
+      line: "#{{ item.key }}"
+      state: present
+      backup: yes
+      backrefs: yes
+      validate: "{{ dnsmasq.testing_command }}"
+    with_items:
+      - "{{ dns_configures.boolean.disabled }}"
 
   - name: Be sure string configs are set
     ansible.builtin.lineinfile:
