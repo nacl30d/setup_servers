@@ -1,0 +1,35 @@
+---
+
+dns_configures:
+  boolean:
+    - key: domain-needed
+      comment: "Never forward plain names (without a dot or domain part)"
+    - key: bogus-priv
+      comment: "Never forward addresses in the non-routed address spaces."
+    - key: no-resolv
+      comment: "Don't read /etc/resolv.conf"
+    - key: no-hosts
+      comment: "Don't read /etc/hosts"
+    - key: expand-hosts
+      comment: "A domain automatically added to simple names in a hosts-file"
+    - key: log-queries
+      comment: "For debugging purposes, log each DNS query as it passes through"
+    - key: clear-on-reload
+      comment: "see: https://askubuntu.com/a/1314942"
+
+  strings:
+    - key: port
+      value: "{{ dns.port }}"
+      comment: "Listen on this specific port instead of the standard DNS port"
+    - key: local
+      value: "/{{ dns.domain }}/"
+      comment: "local-only domains: Queries in these domains are answered from hosts-file"
+    - key: server
+      value: "{{ dns.public_server_address }}"
+      comment: "You can control how dnsmasq talks to a server"
+    - key: addn-hosts
+      value: "{{ dns.hosts_file_path }}"
+      comment: "read another (<-> /etc/hosts) file, as well as /etc/hosts"
+    - key: domain
+      value: "{{ dns.domain }}"
+      comment: "Set the domain for dnsmasq."

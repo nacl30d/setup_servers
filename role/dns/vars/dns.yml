@@ -1,0 +1,6 @@
+---
+dns:
+  port: "53"
+  domain: "example.local"
+  public_server_address: "8.8.8.8"
+  hosts_file_path: "/etc/hosts-dnsmasq"

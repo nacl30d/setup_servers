@@ -1,0 +1,42 @@
+---
+
+- name: Set vars using task running
+  set_fact:
+    dnsmasq:
+      config_file_path: "/etc/dnsmasq.conf"
+      testing_command: "dnsmasq --test"
+
+## Configure dnsmasq.conf
+- block:
+  - name: Be sure boolean configs are enabled
+    ansible.builtin.lineinfile:
+      path: "{{ dnsmasq.config_file_path }}"
+      regexp: "^#{{ item.key }}"
+      line: "{{ item.key }}"
+      state: present
+      backup: yes
+      backrefs: yes
+      validate: "{{ dnsmasq.testing_command }}"
+      with_items:
+        - "{{ dns_configures.boolean }}"
+
+  - name: Be sure string configs are set
+    ansible.builtin.lineinfile:
+      path: "{{ dnsmasq.config_file_path }}"
+      regexp: "^#?{{ item.key }}="
+      line: "{{ item.key }}={{ item.value }}"
+      state: present
+      backup: yes
+      backrefs: yes
+      validate: "{{ dnsmasq.testing_command }}"
+      with_items:
+        - "{{ dns_configures.string }}"
+
+## Add hosts file for dnsmasq
+- name: Be sure hosts file is existing
+  ansible.buildin.copy:
+    src: dnsmasq-hosts
+    dest: "{{ dns.hosts_file_path }}"
+    remote_src: no
+    backup: yes
+    validate: "{{ dnsmasq.testing_command }}"

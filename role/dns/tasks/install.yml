@@ -1,0 +1,13 @@
+---
+
+- name: Be sure dns packages are installed
+  ansible.builtin.package:
+    name:
+      - dnsmasq
+    state: present
+
+- name: Be sure dns service is enabled
+  ansible.builtin.service:
+    name: dnsmasq
+    state: started
+    enabled: yes
