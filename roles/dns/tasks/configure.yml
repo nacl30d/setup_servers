@@ -1,5 +1,8 @@
 ---
 
+- include_vars:
+    dir: vars
+
 - name: Set vars using task running
   set_fact:
     dnsmasq:
@@ -17,8 +20,8 @@
       backup: yes
       backrefs: yes
       validate: "{{ dnsmasq.testing_command }}"
-      with_items:
-        - "{{ dns_configures.boolean }}"
+    with_items:
+      - "{{ dns_configures.boolean }}"
 
   - name: Be sure string configs are set
     ansible.builtin.lineinfile:
@@ -29,13 +32,13 @@
       backup: yes
       backrefs: yes
       validate: "{{ dnsmasq.testing_command }}"
-      with_items:
-        - "{{ dns_configures.string }}"
+    with_items:
+      - "{{ dns_configures.strings }}"
 
 ## Add hosts file for dnsmasq
 - name: Be sure hosts file is existing
-  ansible.buildin.copy:
-    src: dnsmasq-hosts
+  ansible.builtin.copy:
+    src: hosts-dnsmasq
     dest: "{{ dns.hosts_file_path }}"
     remote_src: no
     backup: yes
