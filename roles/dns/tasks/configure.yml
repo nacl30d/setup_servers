@@ -1,6 +1,8 @@
 ---
 
-- include_vars:
+# By default, include vars/main.yml and not read other vars/*
+- name: Include vars
+  include_vars:
     dir: vars
 
 - name: Set vars using task running
@@ -52,6 +54,7 @@
   ansible.builtin.copy:
     src: hosts-dnsmasq
     dest: "{{ dns.hosts_file_path }}"
+    mode: '0644'
     remote_src: no
     backup: yes
     validate: "{{ dnsmasq.testing_command }}"
