@@ -9,7 +9,7 @@
   set_fact:
     dnsmasq:
       config_file_path: "/etc/dnsmasq.conf"
-      testing_command: "dnsmasq --test"
+      testing_command: "dnsmasq --test -C %s"
 
 ## Configure dnsmasq.conf
 - block:
