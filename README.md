@@ -1,6 +1,8 @@
 Server setup utilities
 ===
 
+![Ansible Lint](https://github.com/nacl30d/setup_servers/workflows/Ansible%20Lint/badge.svg)
+
 Install and configure following services.  
 
 * DNS: `dnsmasq` as local dns server
