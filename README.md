@@ -34,5 +34,5 @@ $ ansible-playbook -i inventory/hosts --diff --check
 ### Install
 
 ``` sh
-$ ansible-playbook -i inventory/hosts main.yml
+$ ansible-playbook -i inventory/hosts main.yml --ask-become-pass
 ```
